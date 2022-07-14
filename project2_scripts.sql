@@ -49,3 +49,36 @@ CHANGE COLUMN `school` `school` TEXT NULL ,
 CHANGE COLUMN `school_id` `school_id` INT NOT NULL ,
 ADD PRIMARY KEY (`school_id`);
 ;
+
+
+-- Queries
+
+-- Best reviews of the concurrence
+
+SELECT * 
+FROM project2v2.comments
+WHERE overallScore > 4.6 AND school <> 'ironhack';
+
+-- Worst reviews of Ironhack
+
+SELECT *
+FROM project2v2.comments
+WHERE overallScore < 3 AND school = 'ironhack';
+
+-- Overall score of each school
+
+SELECT school, AVG(overallScore)
+FROM project2v2.comments
+GROUP BY school;
+
+-- Overall scores
+
+SELECT school, program, overallScore, review_body
+FROM project2v2.comments
+WHERE program LIKE 'Data%' OR program LIKE 'Business';
+
+
+SELECT *
+FROM project2v2.comments
+WHERE (overallScore < 3) AND (school = 'ironhack' AND program LIKE 'Data%' OR program LIKE 'Business Ana%');
+
